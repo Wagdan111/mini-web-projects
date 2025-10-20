@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Coffee House</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <!-- ===== الهيدر والترويسة ===== -->
+  <header class="site-header">
+    <div class="wrapper">
+      <nav class="main-nav">
+        <div class="brand-name">Coffee House</div>
+        <div class="nav-menu">
+          <a href="#about">عنّا</a>
+          <a href="#menu">القائمة</a>
+          <a href="#reviews">آراء الزبائن</a>
+          <a href="#contact">تواصل</a>
+        </div>
+      </nav>
+    </div>
+  </header>
+
+  <!-- ===== قسم البطل (Hero Section) ===== -->
+  <section class="hero-section">
+    <h1>استمتع بأجود أنواع القهوة</h1>
+    <p>نكهات مميزة ومذاق لا يُنسى في قلب مدينتك</p>
+  </section>
+
+  <!-- ===== قسم التعريف ===== -->
+  <section id="about" class="about-section">
+    <h2>عن المقهى</h2>
+    <p>
+      نحن في <strong>Coffee House</strong> نؤمن أن القهوة ليست مجرد مشروب، بل تجربة تجمع بين الطعم والرائحة والجو المريح.  
+      منذ عام 2010 ونحن نقدم أجود حبوب البن المحمصة بعناية لنمنحك لحظة دافئة في كل فنجان.
+    </p>
+  </section>
+
+  <!-- ===== قسم القائمة ===== -->
+  <section id="menu" class="menu-section">
+    <h2>قائمتنا</h2>
+    <div class="menu-grid">
+      <div class="menu-card">
+        <img src="Images/Imag1.jpg" alt="لاتيه" />
+        <h3>لاتيه</h3>
+        <p>مزيج ناعم من الإسبريسو والحليب المبخر.</p>
+      </div>
+
+      <div class="menu-card">
+        <img src="Images/Imag2.jpg" alt="كابتشينو" />
+        <h3>كابتشينو</h3>
+        <p>قهوة رغوية لذيذة لمحبي القوام الغني.</p>
+      </div>
+
+      <div class="menu-card">
+        <img src="Images/Imag3.jpg" alt="قهوة سوداء" />
+        <h3>قهوة سوداء</h3>
+        <p>تحميص عميق وطعم قوي لعشاق القهوة الصافية.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== قسم آراء الزبائن ===== -->
+  <section id="reviews" class="reviews-section">
+    <h2>آراء الزبائن</h2>
+    <div class="reviews-grid">
+      <div class="review-item">القهوة مذهلة والمكان هادئ جداً! <span>— سارة</span></div>
+      <div class="review-item">أفضل مقهى زرته في المدينة، الخدمة ممتازة. <span>— أحمد</span></div>
+      <div class="review-item">ديكور جميل ونكهات متنوعة. <span>— ليلى</span></div>
+    </div>
+  </section>
+
+  <!-- ===== قسم التواصل ===== -->
+  <section id="contact" class="contact-section">
+    <h2>تواصل معنا</h2>
+    <form>
+      <input type="text" name="name" placeholder="الاسم" required />
+      <input type="email" name="email" placeholder="البريد الإلكتروني" required />
+      <textarea name="message" rows="5" placeholder="رسالتك" required></textarea>
+      <button type="submit">إرسال</button>
+    </form>
+  </section>
+
+  <!-- ===== الفوتر ===== -->
+  <footer class="site-footer">
+    <p>© 2025 Coffee House. جميع الحقوق محفوظة.</p>
+  </footer>
+</body>
+</html>

@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>قائمة مهامي</title>
+
+  <!-- ربط ملف التنسيقات الخارجي -->
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+  <!-- ===== الحاوية الرئيسية ===== -->
+  <div class="todo-container">
+
+    <!-- ===== العنوان الرئيسي ===== -->
+    <header class="todo-header">
+      <h1>📝 قائمة مهامي اليومية</h1>
+      <p>قم بتحديد المهام التي أنجزتها اليوم</p>
+    </header>
+
+    <!-- ===== قسم مهام العمل ===== -->
+    <section class="todo-section">
+      <h2>💼 مهام العمل</h2>
+      <div class="task-group">
+        <label><input type="checkbox"> مراجعة البريد الإلكتروني</label>
+        <label><input type="checkbox"> اجتماع الفريق الساعة 10 صباحًا</label>
+        <label><input type="checkbox"> إنهاء تقرير المبيعات</label>
+        <label><input type="checkbox"> التخطيط للمشروع الجديد</label>
+      </div>
+    </section>
+
+    <!-- ===== قسم مهام المنزل ===== -->
+    <section class="todo-section">
+      <h2>🏠 مهام المنزل</h2>
+      <div class="task-group">
+        <label><input type="checkbox"> تنظيف الغرفة</label>
+        <label><input type="checkbox"> غسل الصحون</label>
+        <label><input type="checkbox"> تحضير العشاء</label>
+        <label><input type="checkbox"> ترتيب خزانة الملابس</label>
+      </div>
+    </section>
+
+    <!-- ===== قسم مهام الدراسة ===== -->
+    <section class="todo-section">
+      <h2>📚 مهام الدراسة</h2>
+      <div class="task-group">
+        <label><input type="checkbox"> مراجعة دروس الرياضيات</label>
+        <label><input type="checkbox"> قراءة فصل من كتاب التاريخ</label>
+        <label><input type="checkbox"> حل واجب العلوم</label>
+        <label><input type="checkbox"> حفظ 5 آيات من القرآن الكريم</label>
+      </div>
+    </section>
+
+    <!-- ===== جدول مهام الأسبوع ===== -->
+    <section class="todo-section">
+      <h2>📅 مهام الأسبوع</h2>
+      <table class="tasks-table">
+        <thead>
+          <tr>
+            <th>اليوم</th>
+            <th>المهمة</th>
+            <th>الحالة</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td>الأحد</td><td>تحضير عرض تقديمي</td><td>قيد التنفيذ</td></tr>
+          <tr><td>الاثنين</td><td>زيارة العميل</td><td>لم تبدأ</td></tr>
+          <tr><td>الثلاثاء</td><td>تحديث قاعدة البيانات</td><td>مكتملة</td></tr>
+          <tr><td>الأربعاء</td><td>اجتماع الفريق</td><td>قيد التنفيذ</td></tr>
+          <tr><td>الخميس</td><td>تقرير نهاية الأسبوع</td><td>لم تبدأ</td></tr>
+        </tbody>
+      </table>
+    </section>
+
+    <!-- ===== قسم الملاحظات ===== -->
+    <section class="todo-section">
+      <h2>📝 ملاحظات</h2>
+      <textarea rows="4" class="notes-area" placeholder="اكتب ملاحظاتك هنا..."></textarea>
+    </section>
+
+    <!-- ===== الفوتر ===== -->
+    <footer class="todo-footer">
+      <p>آخر تحديث: 28 سبتمبر 2025</p>
+    </footer>
+  </div>
+</body>
+</html>

@@ -1,0 +1,98 @@
+/* ===== إعدادات عامة ===== */
+* {
+  font-family: Arial, sans-serif;
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  color: #333;
+  line-height: 1.6;
+}
+
+/* ===== الهيدر ===== */
+.header-section {
+  background: #4caf50;
+  color: white;
+  text-align: center;
+  padding: 40px 0;
+}
+
+.profile-photo {
+  width: 100px;
+  height: auto;
+  border-radius: 50%;
+}
+
+.header-content h1 {
+  font-size: 2.5em;
+  margin-top: 10px;
+}
+
+.header-content p {
+  font-size: 1.2em;
+}
+
+/* ===== الأقسام العامة ===== */
+section {
+  text-align: center;
+  padding: 60px 20px;
+}
+
+section h2 {
+  font-size: 2em;
+  margin-bottom: 20px;
+}
+
+/* ===== قسم المهارات ===== */
+.skill-item {
+  margin: 20px 0;
+}
+
+.progress-container {
+  width: 80%;
+  height: 20px;
+  background: #ddd;
+  border-radius: 20px;
+  overflow: hidden;
+  margin: 0 auto;
+}
+
+.progress-bar {
+  height: 100%;
+}
+
+.html-skill {
+  width: 90%;
+  background: #f06529;
+}
+
+.css-skill {
+  width: 60%;
+  background: #2e8b57;
+}
+
+/* ===== روابط التواصل ===== */
+.social-links a {
+  display: inline-block;
+  margin: 10px;
+  padding: 10px 20px;
+  background: #4caf50;
+  color: white;
+  border-radius: 5px;
+  text-decoration: none;
+  transition: 0.2s;
+}
+
+.social-links a:hover {
+  background: #333;
+}
+
+/* ===== الفوتر ===== */
+.footer-section {
+  background: #222;
+  color: white;
+  text-align: center;
+  padding: 20px 0;
+}

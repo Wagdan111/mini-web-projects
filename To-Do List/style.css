@@ -1,0 +1,147 @@
+/* ===== إعدادات عامة ===== */
+body {
+  font-family: "Cairo", sans-serif;
+  background: linear-gradient(to right, #141e30, #243b55);
+  color: #f1f1f1;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  min-height: 100vh;
+}
+
+/* ===== الحاوية الرئيسية ===== */
+.todo-container {
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(8px);
+  width: 90%;
+  max-width: 800px;
+  padding: 25px;
+  border-radius: 20px;
+  margin: 30px auto;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.6);
+}
+
+/* ===== الهيدر ===== */
+.todo-header h1 {
+  text-align: center;
+  font-size: 2.5rem;
+  margin-bottom: 10px;
+  color: #ffcc70;
+}
+
+.todo-header p {
+  text-align: center;
+  margin-bottom: 30px;
+  font-size: 1rem;
+  color: #ddd;
+}
+
+/* ===== الأقسام ===== */
+.todo-section h2 {
+  font-size: 1.5rem;
+  margin-top: 25px;
+  margin-bottom: 10px;
+  color: #ffcc70;
+  border-bottom: 2px solid #ffcc70;
+  padding-bottom: 5px;
+}
+
+/* ===== عناصر المهام ===== */
+.task-group label {
+  display: flex;
+  align-items: center;
+  background: rgba(255, 255, 255, 0.1);
+  padding: 12px 15px;
+  border-radius: 12px;
+  margin-bottom: 10px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.task-group label:hover {
+  background: rgba(255, 204, 112, 0.2);
+  transform: translateX(5px);
+}
+
+/* ===== مربعات التحديد ===== */
+.task-group input[type="checkbox"] {
+  margin-right: 10px;
+  width: 18px;
+  height: 18px;
+  accent-color: #ffcc70;
+  cursor: pointer;
+}
+
+/* ===== جدول المهام الأسبوعية ===== */
+.tasks-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 15px;
+  overflow: hidden;
+  border-radius: 12px;
+}
+
+.tasks-table th,
+.tasks-table td {
+  padding: 12px;
+  text-align: center;
+}
+
+.tasks-table th {
+  background: #ffcc70;
+  color: #243b55;
+  font-weight: bold;
+}
+
+.tasks-table td {
+  background: rgba(255, 255, 255, 0.1);
+  color: #f1f1f1;
+}
+
+.tasks-table tr:nth-child(even) td {
+  background: rgba(255, 255, 255, 0.05);
+}
+
+/* ===== ملاحظات ===== */
+.notes-area {
+  width: 100%;
+  padding: 12px;
+  border-radius: 12px;
+  border: none;
+  resize: none;
+  margin-top: 10px;
+  background: rgba(255, 255, 255, 0.1);
+  color: #f1f1f1;
+  font-size: 1rem;
+}
+
+.notes-area::placeholder {
+  color: #ccc;
+}
+
+/* ===== الفوتر ===== */
+.todo-footer {
+  text-align: center;
+  margin-top: 20px;
+  font-size: 0.9rem;
+  color: #aaa;
+}
+
+/* ===== تصميم متجاوب ===== */
+@media (max-width: 600px) {
+  .todo-header h1 {
+    font-size: 2rem;
+  }
+
+  .todo-container {
+    padding: 15px;
+  }
+
+  .tasks-table th,
+  .tasks-table td {
+    font-size: 0.9rem;
+    padding: 8px;
+  }
+}
