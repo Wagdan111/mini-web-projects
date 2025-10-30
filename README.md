@@ -14,6 +14,7 @@ Each project focuses on a specific idea or technique — such as lists, tables, 
 - **Portfolio Pro** – **Under development**, will be a portfolio project to practice creating project showcases.  
 - **Restaurant Menu** – A restaurant menu page to practice table design and layout.  
 - **To-Do List** – A daily task list with clean design, for practicing lists and styling.
+- **Project – CV**
 
 ---
 
