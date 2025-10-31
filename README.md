@@ -6,18 +6,6 @@ Each project focuses on a specific idea or technique — such as lists, tables, 
 
 ---
 
-## 📂 Repository Contents
-
-- **Coffee House** – A simple café webpage project for practicing layout and styling.  
-- **OutLine** – An educational project to practice the **CSS outline** property.  
-- **Personal Website** – A small personal webpage to showcase information and skills.  
-- **Portfolio Pro** – **Under development**, will be a portfolio project to practice creating project showcases.  
-- **Restaurant Menu** – A restaurant menu page to practice table design and layout.  
-- **To-Do List** – A daily task list with clean design, for practicing lists and styling.
-- **Project – CV**
-
----
-
 ## 🎯 Objectives
 
 - Improve skills in writing clean and organized code.  
