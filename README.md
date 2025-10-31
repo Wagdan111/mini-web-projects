@@ -18,7 +18,8 @@ Each project focuses on a specific idea or technique — such as lists, tables, 
 ## 🛠️ Technologies Used
 
 - HTML5  
-- CSS3  
+- CSS3
+- JavaScript
 
 ---
 
