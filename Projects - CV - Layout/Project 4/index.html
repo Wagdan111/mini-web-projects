@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Showcase CV – Cover Sidebar (CSS-only)</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <main class="wrap">
+    <!-- =============================== COVER SIDEBAR =============================== -->
+    <aside class="cover" aria-label="Cover">
+      <!-- Top: photo + name -->
+      <div class="me">
+        <div class="avatar" role="img" aria-label="Profile photo">
+          <img src="images/MyImage.jpg" alt="Your Name portrait" loading="lazy" />
+        </div>
+        <div>
+          <h1 class="name">YOUR NAME</h1>
+          <p class="role">Front-End Developer • UI Engineer</p>
+        </div>
+      </div>
+
+      <!-- Middle: in-page navigation (anchors) -->
+      <nav class="nav" aria-label="Section navigation">
+        <a href="#about">About</a>
+        <a href="#skills">Skills</a>
+        <a href="#experience">Experience</a>
+        <a href="#projects">Projects</a>
+        <a href="#education">Education</a>
+      </nav>
+
+      <!-- Bottom: quick social/contact -->
+      <div class="social" aria-label="Quick links">
+        <a href="mailto:you@example.com">you@example.com</a>
+        <a href="https://your-portfolio.example" target="_blank" rel="noopener">Portfolio</a>
+        <a href="https://www.linkedin.com/in/your-profile" target="_blank" rel="noopener">LinkedIn</a>
+      </div>
+    </aside>
+
+    <!-- ================================ CONTENT ================================= -->
+    <section class="content" aria-label="Main content">
+      <!-- Each real section has an ID for anchors and :target styles -->
+      <section id="about" class="section" aria-labelledby="about-title">
+        <h2 id="about-title">About</h2>
+        <p class="lead">
+          Impact-driven developer focused on accessible, fast, and delightful user interfaces.
+          I love design systems, CSS architecture, and performance.
+        </p>
+        <div class="chips" style="margin-top:10px">
+          <span class="chip">Amman, Jordan</span>
+          <span class="chip">Arabic (Native)</span>
+          <span class="chip">English (Professional)</span>
+        </div>
+      </section>
+
+      <section id="skills" class="section" aria-labelledby="skills-title">
+        <h2 id="skills-title">Skills</h2>
+        <p class="muted">Core strengths and tools I use daily.</p>
+        <div class="chips" style="margin-top:10px">
+          <span class="chip">Semantic HTML</span>
+          <span class="chip">Modern CSS</span>
+          <span class="chip">Accessibility (a11y)</span>
+          <span class="chip">Git & GitHub</span>
+          <span class="chip">Figma</span>
+          <span class="chip">Chrome DevTools</span>
+        </div>
+      </section>
+
+      <section id="experience" class="section" aria-labelledby="exp-title">
+        <h2 id="exp-title">Experience</h2>
+        <div class="timeline">
+          <div class="tl-item">
+            <div class="tl-role">Senior Front-End Developer</div>
+            <div class="tl-meta">Tech Co • Amman • 2023 — Present</div>
+            <ul class="muted">
+              <li>Built a reusable component library; cut CSS by 30%.</li>
+              <li>Led a11y improvements to WCAG 2.1 AA; documented patterns.</li>
+            </ul>
+          </div>
+          <div class="tl-item">
+            <div class="tl-role">Web Designer</div>
+            <div class="tl-meta">Creative Studio • Remote • 2020 — 2023</div>
+            <ul class="muted">
+              <li>Prototyped 12 marketing sites; established a mini design system.</li>
+              <li>Delivered clean, semantic HTML/CSS handoffs to devs.</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <section id="projects" class="section" aria-labelledby="proj-title">
+        <h2 id="proj-title">Selected Projects</h2>
+        
+        <div class="projects">
+          <a class="proj" href="#" aria-label="Portfolio Website">
+            <h3>Portfolio Website</h3>
+            <p class="muted">Static site >95 Lighthouse Performance, CI/CD previews.</p>
+          </a>
+
+          <a class="proj" href="#" aria-label="Design System Demo">
+            <h3>Design System Demo</h3>
+            <p class="muted">Token-based theming with CSS variables; documented components.</p>
+          </a>
+
+          <a class="proj" href="#" aria-label="A11y Audit Toolkit">
+            <h3>A11y Audit Toolkit</h3>
+            <p class="muted">Checklists to raise Accessibility scores.</p>
+          </a>
+
+        </div>
+      </section>
+
+      <section id="education" class="section" aria-labelledby="edu-title">
+        <h2 id="edu-title">Education</h2>
+        <p><strong>B.Sc. in Computer Science</strong><br/>University Name • 2016 — 2020</p>
+        <ul class="muted">
+          <li>Graduated with Honors</li>
+          <li>Key courses: HCI, Data Structures, Databases</li>
+        </ul>
+      </section>
+    </section>
+  </main>
+</body>
+</html>
