@@ -1,0 +1,173 @@
+  :root{
+      --bg: #fcfcfc;
+      --text: #1f2330;
+      --muted: #6b7280;
+      --accent: #6d28d9;        /* purple-700 */
+      --accent-ink: #ffffff;
+      --card-bg: #ffffff;
+      --border: #e5e7eb;
+      --radius: 14px;
+      --shadow: 0 10px 24px rgba(0,0,0,.12);
+      --maxw: 1100px;
+    }
+
+    @media (prefers-color-scheme: dark){
+      :root{
+        --bg: #0e1016;
+        --text: #e7e9ee;
+        --muted: #9aa2b2;
+        --accent: #a78bfa;      /* violet-300 */
+        --accent-ink: #0e1016;
+        --card-bg: #171b22;
+        --border: #242a35;
+        --shadow: 0 16px 36px rgba(0,0,0,.55);
+      }
+    }
+
+    /* ===== Base ===== */
+    html,body{margin:0;padding:0}
+    body{
+      font-family: "Georgia", serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.68;
+    }
+
+    header{
+      max-width: var(--maxw);
+      margin: 0 auto;
+      padding: 2rem 1rem 1rem;
+    }
+    .title{
+      display:flex; align-items:flex-end; justify-content:space-between; gap:1rem;
+      border-bottom: 1px solid var(--border);
+      padding-bottom: .75rem;
+    }
+    .title h1{
+      margin:0;
+      font-size: clamp(1.6rem, 3vw, 2.2rem);
+      letter-spacing:.2px;
+    }
+    .subtitle{
+      margin:0; color: var(--muted); font-size:.98rem;
+    }
+
+    /* ===== Masonry Wall (columns) ===== */
+    .wall{
+      max-width: var(--maxw);
+      margin: 1rem auto 3rem;
+      padding: 0 1rem;
+      column-count: 2;
+      column-gap: 1.25rem;
+    }
+    @media (max-width: 820px){ .wall{ column-count:1; } }
+
+    .card{
+      display: inline-block;
+      width: 100%;
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      margin: 0 0 1.25rem;
+      overflow: hidden;
+      break-inside: avoid;
+      transform: translateZ(0);
+      transition: transform .25s ease, box-shadow .25s ease;
+    }
+    .card:hover{ transform: translateY(-6px); }
+
+    .thumb{
+      width: 100%;
+      height: clamp(180px, 30vw, 280px);
+      object-fit: cover;
+      display:block;
+    }
+
+    .card-body{
+      padding: 1rem 1rem 1.15rem;
+    }
+    .card h2{
+      margin: .25rem 0 .4rem;
+      font-size: 1.25rem;
+      line-height:1.22;
+      color: var(--accent);
+    }
+    .excerpt{ margin: 0 0 .9rem; }
+
+    .read-more{
+      display:inline-block;
+      background: var(--accent);
+      color: var(--accent-ink);
+      text-decoration:none;
+      font-weight:700;
+      padding: .5rem .85rem;
+      border-radius: 999px;
+      box-shadow: 0 6px 14px rgba(109,40,217,.35);
+      transition: transform .2s ease, box-shadow .2s ease, opacity .2s ease;
+    }
+    .read-more:hover{
+      transform: translateY(-2px);
+      box-shadow: 0 10px 20px rgba(109,40,217,.45);
+      opacity:.96;
+    }
+
+    /* ===== Dialogs ===== */
+    dialog{
+      width: 92%;
+      max-width: 760px;
+      border:none;
+      border-radius: 18px;
+      box-shadow: var(--shadow);
+      background: var(--card-bg);
+      color: var(--text);
+      padding: 2rem;
+      position: relative;
+      text-align:left;
+    }
+    dialog::backdrop{ background: rgba(0,0,0,.55); }
+
+    .close-btn{
+      background:none; border:none; cursor:pointer;
+      position:absolute; right:1rem; top:1rem;
+      font-size:1.25rem; color: var(--accent);
+    }
+
+    dialog img{
+      width: 460px; max-width:100%; height:auto;
+      display:block; margin: 0 auto 1rem;
+      border-radius: 14px;
+    }
+    dialog h2{ margin:.25rem 0 .8rem; line-height:1.25; }
+    dialog p{ margin:0 0 1rem; }
+
+    /* ===== Print: Only OPEN dialog ===== */
+    @media print{
+      @page{ margin:16mm; }
+      *{ -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+      html, body{ height:auto !important; overflow:visible !important; }
+
+      body:has(dialog[open]) > :not(dialog[open]){ display:none !important; }
+      dialog:not([open]){ display:none !important; }
+
+      dialog[open]{
+        display:block !important;
+        position: static !important;
+        inset: auto !important;
+        transform:none !important;
+        width:auto !important; max-width:none !important;
+        height:auto !important; max-height:none !important;
+        overflow:visible !important;
+        box-shadow:none !important;
+        padding:0 !important;
+        background: var(--card-bg) !important;
+      }
+      dialog[open]::backdrop{ display:none !important; }
+
+      .close-btn, .read-more, nav{ display:none !important; }
+      h1, h2, img{ break-inside: avoid; page-break-inside: avoid; }
+      p, li{ orphans:3; widows:3; }
+
+      *{ scrollbar-width:none !important; }
+      *::-webkit-scrollbar{ display:none !important; }
+    }

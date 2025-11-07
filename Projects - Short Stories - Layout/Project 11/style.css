@@ -1,0 +1,202 @@
+  :root{
+      --bg: #fcfbf9;
+      --ink: #171717;
+      --muted: #6b7280;
+      --accent: #dc2626;         /* red-600 */
+      --accent-ink: #ffffff;
+      --surface: #ffffff;
+      --border: #e5e7eb;
+      --radius: 16px;
+      --shadow: 0 12px 28px rgba(0,0,0,.12);
+      --maxw: 1160px;
+      --hero-h: min(64vh, 560px);
+    }
+    @media (prefers-color-scheme: dark){
+      :root{
+        --bg: #0c0f14;
+        --ink: #e6e8ec;
+        --muted: #9aa2b2;
+        --accent: #f87171;       /* red-400 */
+        --accent-ink: #0c0f14;
+        --surface: #151a21;
+        --border: #232a34;
+        --shadow: 0 18px 36px rgba(0,0,0,.55);
+      }
+    }
+
+    /* ===== Base ===== */
+    html,body{margin:0;padding:0}
+    body{
+      font-family: "Georgia", serif;
+      background: var(--bg);
+      color: var(--ink);
+      line-height: 1.68;
+    }
+    header{
+      max-width: var(--maxw);
+      margin: 0 auto;
+      padding: 2rem 1rem 1rem;
+      border-bottom: 1px solid var(--border);
+    }
+    .masthead{
+      display:flex; align-items:flex-end; justify-content:space-between; gap:1rem;
+    }
+    .masthead h1{
+      margin:0; font-size: clamp(2rem, 4vw, 3rem); letter-spacing:.5px;
+    }
+    .dek{ margin:.2rem 0 0; color: var(--muted); font-size:1rem; }
+
+    /* ===== Cover Grid ===== */
+    .cover{
+      max-width: var(--maxw);
+      margin: 1.25rem auto 2.5rem;
+      padding: 0 1rem;
+      display: grid;
+      grid-template-columns: 2fr 1fr;
+      grid-template-rows: var(--hero-h) auto;
+      gap: 1rem;
+    }
+    @media (max-width: 980px){
+      .cover{
+        grid-template-columns: 1fr;
+        grid-template-rows: auto;
+      }
+    }
+
+    /* Hero Feature */
+    .hero{
+      grid-column: 1 / 2;
+      grid-row: 1 / 3;
+      position: relative;
+      border-radius: var(--radius);
+      overflow: hidden;
+      box-shadow: var(--shadow);
+      background: #000;
+      min-height: var(--hero-h);
+      display: grid;
+    }
+    @media (max-width: 980px){
+      .hero{ grid-column: 1; grid-row: auto; }
+    }
+    .hero img{
+      position:absolute; inset:0; width:100%; height:100%;
+      object-fit: cover; opacity:.9; filter: saturate(1.05) contrast(1.05);
+    }
+    .scrim{
+      position:absolute; inset:0;
+      background: linear-gradient(180deg, rgba(0,0,0,.25), rgba(0,0,0,.55));
+    }
+    .hero-body{
+      position:relative; z-index:2; align-self:end;
+      padding: 1.2rem 1.2rem 1.35rem;
+      color: #fff;
+      text-shadow: 0 2px 10px rgba(0,0,0,.45);
+    }
+    .kicker{
+      display:inline-block; font-size:.85rem; letter-spacing:.12em;
+      text-transform: uppercase; background: rgba(220,38,38,.9);
+      padding:.25rem .55rem; border-radius: 999px; margin-bottom:.5rem;
+    }
+    .hero h2{
+      margin: .25rem 0 .5rem;
+      font-size: clamp(1.6rem, 3vw, 2.1rem);
+      line-height: 1.15;
+    }
+    .hero p{ margin: 0 0 .9rem; max-width: 60ch; }
+    .cta{
+      display:inline-block; font-weight:700; text-decoration:none;
+      background: var(--accent); color: var(--accent-ink);
+      padding:.6rem 1rem; border-radius: 999px;
+      box-shadow: 0 10px 24px rgba(220,38,38,.32);
+    }
+
+    /* Supporting Promos */
+    .promo{
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      overflow: hidden;
+      display: grid;
+      grid-template-rows: 180px auto;
+    }
+    .promo img{
+      width:100%; height:100%; object-fit: cover; display:block;
+    }
+    .promo-body{ padding: 1rem 1rem 1.15rem; }
+    .promo h3{
+      margin:.2rem 0 .45rem; color: var(--accent);
+      font-size: 1.2rem; line-height:1.22;
+    }
+    .promo .read-more{
+      display:inline-block; margin-top:.4rem;
+      background: var(--accent); color: var(--accent-ink);
+      text-decoration:none; font-weight:700; padding:.5rem .85rem;
+      border-radius:999px;
+      box-shadow: 0 8px 18px rgba(220,38,38,.28);
+    }
+
+    /* ===== Dialogs ===== */
+    dialog{
+      width: 92%;
+      max-width: 760px;
+      border:none;
+      border-radius: 18px;
+      box-shadow: var(--shadow);
+      background: var(--surface);
+      color: var(--ink);
+      padding: 2rem;
+      position: relative;
+      text-align:left;
+    }
+    dialog::backdrop{ background: rgba(0,0,0,.55); }
+    .close-btn{
+      background:none; border:none; cursor:pointer;
+      position:absolute; right:1rem; top:1rem;
+      font-size:1.25rem; color: var(--accent);
+    }
+    dialog img{
+      width: 460px; max-width:100%; height:auto;
+      display:block; margin: 0 auto 1rem;
+      border-radius: 14px;
+    }
+    dialog h2{ margin:.25rem 0 .8rem; line-height:1.25; }
+    dialog p{ margin:0 0 1rem; }
+
+    /* ===== Focus styles ===== */
+    a, button{ outline: none; }
+    a:focus-visible, button:focus-visible{
+      box-shadow: 0 0 0 3px rgba(220,38,38,.35), 0 0 0 6px rgba(220,38,38,.15);
+      transition: box-shadow .15s ease;
+    }
+
+    /* ===== Print: Only OPEN dialog ===== */
+    @media print{
+      @page{ margin:16mm; }
+      *{ -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+      html, body{ height:auto !important; overflow:visible !important; }
+
+      body:has(dialog[open]) > :not(dialog[open]){ display:none !important; }
+      dialog:not([open]){ display:none !important; }
+
+      dialog[open]{
+        display:block !important;
+        position: static !important;
+        inset: auto !important;
+        transform:none !important;
+        width:auto !important; max-width:none !important;
+        height:auto !important; max-height:none !important;
+        overflow:visible !important;
+        box-shadow:none !important;
+        padding:0 !important;
+        background: var(--surface) !important;
+      }
+      dialog[open]::backdrop{ display:none !important; }
+
+      .close-btn, .read-more, nav, .cta{ display:none !important; }
+      h1, h2, img{ break-inside: avoid; page-break-inside: avoid; }
+      p, li{ orphans:3; widows:3; }
+
+      *{ scrollbar-width:none !important; }
+      *::-webkit-scrollbar{ display:none !important; }
+    }

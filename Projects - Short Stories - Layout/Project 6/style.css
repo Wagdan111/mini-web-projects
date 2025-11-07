@@ -1,0 +1,200 @@
+    :root{
+      --bg: #f6f9fc;
+      --ink: #0f172a;
+      --muted: #5b6b7f;
+      --accent: #3b82f6;       /* blue-500 */
+      --accent-ink: #0b1220;
+      --surface: #ffffff;
+      --border: #e5e7eb;
+      --rule: #e9eef5;
+      --radius: 16px;
+      --shadow: 0 14px 32px rgba(0,0,0,.10);
+      --maxw: 1280px;
+      --rail: 280px;
+    }
+    @media (prefers-color-scheme: dark){
+      :root{
+        --bg: #0a101c;
+        --ink: #e7eaf0;
+        --muted: #9aa3b2;
+        --accent: #60a5fa;     /* blue-400 */
+        --accent-ink: #0a101c;
+        --surface: #131a2a;
+        --border: #1d2740;
+        --rule: #1a2338;
+        --shadow: 0 18px 36px rgba(0,0,0,.55);
+      }
+    }
+
+    html,body{margin:0;padding:0}
+    html{ scroll-behavior:smooth; }
+    body{
+      font-family: "Georgia", serif;
+      background: var(--bg);
+      color: var(--ink);
+      line-height: 1.72;
+    }
+
+    header{
+      border-bottom: 1px solid var(--rule);
+      background: color-mix(in oklab, var(--bg) 80%, transparent);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      position: sticky; top: 0; z-index: 20;
+    }
+    .mast{
+      max-width: var(--maxw);
+      margin: 0 auto;
+      padding: 1.2rem 1rem .9rem;
+    }
+    .mast h1{ margin:0; font-size: clamp(2rem, 4vw, 2.8rem) }
+    .dek{ margin:.35rem 0 0; color: var(--muted) }
+
+    /* ===== Split Grid ===== */
+    .wrap{
+      max-width: var(--maxw);
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: minmax(220px, var(--rail)) 1fr;
+      gap: 1.2rem;
+      padding: 1rem;
+    }
+
+    /* Sidebar rail */
+    .rail{
+      position: sticky; top: 76px; /* just below header */
+      align-self: start;
+      display: grid; gap: .9rem;
+      padding-bottom: 1rem;
+      max-height: calc(100vh - 88px);
+      overflow: auto;
+      scrollbar-gutter: stable;
+    }
+    .rail .card-link{
+      display: grid;
+      grid-template-columns: 84px 1fr;
+      gap: .7rem; align-items: center;
+      text-decoration: none; color: inherit;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: .5rem; box-shadow: var(--shadow);
+    }
+    .rail .thumb{
+      width: 84px; height: 64px; object-fit: cover; border-radius: 10px;
+      border: 1px solid var(--border);
+    }
+    .rail .meta h3{ margin:.05rem 0 .15rem; font-size: 1rem; color: var(--accent); }
+    .rail .meta p{ margin:0; color: var(--muted); font-size: .9rem; }
+    .rail .card-link:focus-visible{
+      outline: 3px solid color-mix(in oklab, var(--accent) 55%, transparent);
+      outline-offset: 2px;
+    }
+
+    /* Reader pane */
+    .reader{
+      display: grid; gap: 1.2rem;
+      padding-bottom: 2rem;
+    }
+    section.story{
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      overflow: clip;
+      scroll-margin-top: 95px;  
+    }
+    .hero{
+      width: 100%; aspect-ratio: 16/7.5; object-fit: cover;
+      display:block; border-bottom: 1px solid var(--border);
+    }
+    .pad{ padding: 1.1rem 1.2rem 1.3rem; }
+    .kicker{
+      display:inline-block; font-size:.8rem; letter-spacing:.14em; text-transform:uppercase;
+      color: var(--accent); margin-bottom:.4rem;
+    }
+    .title{ margin:.1rem 0 .45rem; font-size: clamp(1.5rem, 2.4vw, 2rem); color: var(--accent); }
+    .lede{ margin:0 0 .95rem; color: var(--ink); }
+    .more{
+      display:inline-block; background: var(--accent); color: var(--accent-ink);
+      text-decoration:none; font-weight:700; padding:.6rem 1rem; border-radius: 999px;
+      box-shadow: 0 12px 26px rgba(59,130,246,.28);
+    }
+    .info{
+      margin-top:.7rem; color: var(--muted); font-size:.95rem;
+      border-top: 1px dashed var(--rule); padding-top:.7rem;
+      display:flex; gap: .8rem; flex-wrap: wrap;
+    }
+
+    /* Dialogs */
+    dialog{
+      width: 92%;
+      max-width: 760px;
+      border: none;
+      border-radius: 18px;
+      box-shadow: var(--shadow);
+      background: var(--surface);
+      color: var(--ink);
+      padding: 2rem;
+      position: relative;
+      text-align: left;
+    }
+    dialog::backdrop{ background: rgba(0,0,0,.55); }
+    .close-btn{
+      background:none; border:none; cursor:pointer;
+      position:absolute; right:1rem; top:1rem;
+      font-size:1.25rem; color: var(--accent);
+    }
+    dialog img{
+      width: 460px; max-width:100%; height:auto;
+      display:block; margin:0 auto 1rem; border-radius:14px; border:1px solid var(--border);
+    }
+    dialog h2{ margin:.25rem 0 .8rem; line-height:1.25; }
+    dialog p{ margin:0 0 1rem; }
+
+    /* Focus helper */
+    a, button{ outline:none; }
+    a:focus-visible, button:focus-visible{
+      box-shadow: 0 0 0 3px color-mix(in oklab, var(--accent) 50%, transparent),
+                  0 0 0 6px color-mix(in oklab, var(--accent) 25%, transparent);
+      border-radius: 12px;
+      transition: box-shadow .15s ease;
+    }
+
+    /* Responsive */
+    @media (max-width: 900px){
+      .wrap{ grid-template-columns: 1fr; }
+      .rail{ position: static; max-height: none; display:flex; overflow:auto; }
+      .rail .card-link{ min-width: 260px; }
+    }
+
+    /* Print: only OPEN dialog */
+    @media print{
+      @page{ margin:16mm; }
+      *{ -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+      html, body{ height:auto !important; overflow:visible !important; }
+
+      body:has(dialog[open]) > :not(dialog[open]){ display:none !important; }
+      dialog:not([open]){ display:none !important; }
+
+      dialog[open]{
+        display:block !important;
+        position: static !important;
+        inset: auto !important;
+        transform:none !important;
+        width:auto !important; max-width:none !important;
+        height:auto !important; max-height:none !important;
+        overflow:visible !important;
+        box-shadow:none !important;
+        padding:0 !important;
+        background: var(--surface) !important;
+      }
+      dialog[open]::backdrop{ display:none !important; }
+
+      .close-btn, .more, .rail{ display:none !important; }
+      h1, h2, img{ break-inside: avoid; page-break-inside: avoid; }
+      p, li{ orphans:3; widows:3; }
+
+      *{ scrollbar-width:none !important; }
+      *::-webkit-scrollbar{ display:none !important; }
+    }

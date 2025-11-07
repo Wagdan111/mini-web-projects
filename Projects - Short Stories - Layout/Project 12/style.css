@@ -1,0 +1,220 @@
+  :root{
+      --bg: #fafafa;
+      --text: #1f2937;
+      --muted: #6b7280;
+      --accent: #ef4444;           /* red-500 */
+      --accent-ink: #ffffff;
+      --card-bg: #ffffff;
+      --border: #e5e7eb;
+      --radius: 16px;
+      --shadow: 0 12px 28px rgba(0,0,0,.12);
+      --maxw: 1200px;
+      --snap-gap: 1rem;
+      --slide-w: clamp(280px, 40vw, 420px);
+      --slide-h: 520px;
+    }
+
+    @media (prefers-color-scheme: dark){
+      :root{
+        --bg: #0e1116;
+        --text: #e5e7eb;
+        --muted: #9aa2b2;
+        --accent: #f87171;         /* red-400 */
+        --accent-ink: #0e1116;
+        --card-bg: #161b22;
+        --border: #232a34;
+        --shadow: 0 18px 36px rgba(0,0,0,.55);
+      }
+    }
+
+    /* ===== Base ===== */
+    html,body{margin:0;padding:0}
+    body{
+      font-family: "Georgia", serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.7;
+    }
+
+    header{
+      max-width: var(--maxw);
+      margin: 0 auto;
+      padding: 2rem 1rem 1rem;
+    }
+    .titlebar{
+      display:flex; align-items:flex-end; justify-content:space-between; gap:1rem;
+      border-bottom: 1px solid var(--border);
+      padding-bottom: .75rem;
+    }
+    .titlebar h1{
+      margin:0; font-size: clamp(1.8rem, 3.2vw, 2.5rem);
+      letter-spacing:.2px;
+    }
+    .subtitle{ margin:0; color: var(--muted); font-size:.98rem; }
+
+    /* ===== Snap Carousel ===== */
+    .wrap{
+      max-width: var(--maxw);
+      margin: 0 auto 2rem;
+      padding: 1rem;
+    }
+
+    .scroller{
+      display: grid;
+      grid-auto-flow: column;
+      grid-auto-columns: var(--slide-w);
+      gap: var(--snap-gap);
+      overflow-x: auto;
+      overscroll-behavior-x: contain;
+      padding-bottom: .5rem;
+      scroll-snap-type: x mandatory;
+      scrollbar-gutter: stable both-edges;
+    }
+    /* mobile full-bleed padding "peeks" */
+    .scroller::before, .scroller::after{
+      content:""; width: .25rem; /* tiny guards to keep first/last centered */
+    }
+
+    .slide{
+      scroll-snap-align: start;
+      scroll-snap-stop: always;
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      overflow: hidden;
+      display: flex; flex-direction: column;
+      min-height: var(--slide-h);
+      transition: transform .25s ease, box-shadow .25s ease;
+    }
+    .slide:focus-within,
+    .slide:hover{ transform: translateY(-6px); }
+
+    .thumb{
+      width: 100%;
+      height: clamp(180px, 35vh, 260px);
+      object-fit: cover;
+      display: block;
+    }
+
+    .body{
+      display:flex; flex-direction: column;
+      padding: 1rem 1rem 1.15rem;
+      gap: .75rem; flex: 1;
+    }
+    .body h2{
+      margin:.25rem 0 .2rem;
+      font-size: 1.35rem;
+      line-height: 1.22;
+      color: var(--accent);
+    }
+    .excerpt{ margin: 0; }
+    .spacer{ flex:1; }
+
+    .cta-row{
+      display:flex; align-items:center; justify-content:space-between; gap:.75rem;
+      margin-top: .35rem;
+    }
+
+    .read-more{
+      display:inline-block;
+      background: var(--accent);
+      color: var(--accent-ink);
+      text-decoration: none;
+      font-weight: 700;
+      padding: .55rem .9rem;
+      border-radius: 999px;
+      box-shadow: 0 8px 18px rgba(239,68,68,.28);
+      transition: transform .2s ease, box-shadow .2s ease, opacity .2s ease;
+    }
+    .read-more:hover{ transform: translateY(-2px); box-shadow: 0 12px 22px rgba(239,68,68,.35); }
+
+    /* helper buttons */
+    .pill{
+      display:inline-block; font-size:.85rem;
+      border: 1px solid var(--border);
+      border-radius: 999px; padding: .4rem .7rem;
+      text-decoration: none; color: var(--text);
+      opacity:.85;
+    }
+
+    /* ===== Scroll buttons (optional) ===== */
+    .controls{
+      display:flex; gap:.5rem; justify-content:flex-end; align-items:center;
+      max-width: var(--maxw); margin: 0 auto 2rem; padding: 0 1rem; 
+    }
+    .btn{
+      background: var(--card-bg); color: var(--text);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: .55rem .8rem;
+      cursor: pointer;
+      box-shadow: var(--shadow);
+    }
+
+    /* ===== Dialogs ===== */
+    dialog{
+      width: 92%;
+      max-width: 760px;
+      border: none;
+      border-radius: 18px;
+      box-shadow: var(--shadow);
+      background: var(--card-bg);
+      color: var(--text);
+      padding: 2rem;
+      position: relative;
+      text-align: left;
+    }
+    dialog::backdrop{ background: rgba(0,0,0,.55); }
+
+    .close-btn{
+      background: none; border: none; cursor: pointer;
+      position: absolute; right: 1rem; top: 1rem;
+      font-size: 1.25rem; color: var(--accent);
+    }
+
+    dialog img{
+      width: 460px; max-width: 100%; height: auto;
+      display: block; margin: 0 auto 1rem;
+      border-radius: 14px;
+    }
+    dialog h2{ margin: .25rem 0 .8rem; line-height: 1.25; }
+    dialog p{ margin: 0 0 1rem; }
+
+    /* ===== Focus styles ===== */
+    a, button{ outline: none; }
+    a:focus-visible, button:focus-visible{
+      box-shadow: 0 0 0 3px rgba(239,68,68,.35), 0 0 0 6px rgba(239,68,68,.15);
+      transition: box-shadow .15s ease;
+    }
+
+    /* ===== Print: Only OPEN dialog ===== */
+    @media print{
+      @page{ margin:16mm; }
+      *{ -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+      html, body{ height:auto !important; overflow:visible !important; }
+
+      body:has(dialog[open]) > :not(dialog[open]){ display:none !important; }
+      dialog:not([open]){ display:none !important; }
+
+      dialog[open]{
+        display:block !important;
+        position: static !important;
+        inset: auto !important;
+        transform:none !important;
+        width:auto !important; max-width:none !important;
+        height:auto !important; max-height:none !important;
+        overflow:visible !important;
+        box-shadow:none !important;
+        padding:0 !important;
+        background: var(--card-bg) !important;
+      }
+      dialog[open]::backdrop{ display:none !important; }
+
+      .close-btn, .read-more, nav{ display:none !important; }
+      h1, h2, img{ break-inside: avoid; page-break-inside: avoid; }
+      p, li{ orphans:3; widows:3; }
+
+      *{ scrollbar-width:none !important; }
+      *::-webkit-scrollbar{ display:none !important; }
+    }
