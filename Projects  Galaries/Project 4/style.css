@@ -1,0 +1,218 @@
+    :root{
+      --bg: #fbfbfb;
+      --ink: #1f2937;
+      --muted: #6b7280;
+
+      --accent: #2563eb;       /* blue-600 for small accents */
+      --paper: #ffffff;        /* “polaroid” paper color */
+      --border: #e5e7eb;
+
+      --radius: 14px;          /* small rounding on the paper corners */
+      --shadow-up: 0 16px 40px rgba(0,0,0,.18);
+      --shadow-rest: 0 12px 28px rgba(0,0,0,.12);
+      --gap: 1rem;             /* grid gap */
+      --maxw: 1200px;          /* page width cap */
+    }
+
+    @media (prefers-color-scheme: dark){
+      :root{
+        --bg: #0e1116;
+        --ink: #e5e7eb;
+        --muted: #9aa2b2;
+
+        --accent: #60a5fa;     /* blue-400 in dark */
+        --paper: #12161d;      /* tinted “paper” for dark */
+        --border: #232a34;
+
+        --shadow-up: 0 24px 48px rgba(0,0,0,.55);
+        --shadow-rest: 0 18px 36px rgba(0,0,0,.55);
+      }
+    }
+
+    /* ========== Base page styling ========== */
+    html, body { margin: 0; padding: 0; }
+    body{
+      font-family: ui-serif, Georgia, "Times New Roman", serif;
+      background: var(--bg);
+      color: var(--ink);
+      line-height: 1.7;
+    }
+
+    /* ========== Header & Menu ========== */
+    header{
+      max-width: var(--maxw);
+      margin: 0 auto;
+      padding: 2rem 1rem 1rem;
+      border-bottom: 1px solid var(--border);
+    }
+    .masthead{
+      display:flex; align-items:flex-end; justify-content:space-between; gap:1rem;
+      flex-wrap: wrap;
+    }
+    .masthead h1{
+      margin:0;
+      font-size: clamp(1.6rem, 3.5vw, 2.3rem);
+      letter-spacing:.2px;
+    }
+    .dek{
+      margin:.35rem 0 0; color: var(--muted);
+      max-width: 65ch;
+    }
+
+    /* “Tabs-like” pill menu (purely decorative here) */
+    nav.menu{
+      margin-top: 1rem;
+      display:flex; flex-wrap: wrap; gap:.5rem;
+    }
+    .menu a{
+      display:inline-block;
+      text-decoration:none;
+      color: var(--ink);
+      border: 1px solid var(--border);
+      background: #fff;
+      padding: .45rem .75rem;
+      border-radius: 999px;
+      font-size: .95rem;
+      transition: background .2s ease, transform .2s ease, box-shadow .2s ease, color .2s ease;
+      box-shadow: var(--shadow-rest);
+    }
+    .menu a:hover{
+      background: rgba(37,99,235,.06); /* faint blue wash */
+      transform: translateY(-2px);
+    }
+    @media (prefers-color-scheme: dark){
+      .menu a{ background: #0f131a; color: var(--ink); }
+      .menu a:hover{ background: rgba(96,165,250,.08); }
+    }
+
+    /* ========== Gallery Grid ========== */
+    .wrap{
+      max-width: var(--maxw);
+      margin: 1.25rem auto 2.25rem;
+      padding: 0 1rem;
+    }
+    /* Responsive, “card-sized” slots using minmax.
+       The white “polaroid” is inside each slot. */
+    .grid{
+      display:grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: var(--gap);
+      align-items: start;
+    }
+
+    /* ========== Polaroid Card ========== */
+    .card{
+      /* “Paper” slab */
+      background: var(--paper);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow-rest);
+      position: relative;
+      overflow: hidden;           /* clip the caption overlay */
+      transform-origin: center;
+      transition: transform .3s ease, box-shadow .3s ease, filter .3s ease;
+      /* Subtle rotation will be applied per :nth-child below */
+    }
+
+    /* “Photo” area: add thicker bottom padding to mimic polaroid label space */
+    .photo{
+      display:block;
+      width: 100%;
+      height: 220px;              /* unified height for a tidy grid */
+      object-fit: cover;
+      border-bottom: 1px solid var(--border);
+      /* slight saturation for punch */
+      filter: saturate(1.05) contrast(1.02);
+      transition: filter .3s ease, transform .3s ease;
+    }
+
+    /* Caption label line (static text under the photo) */
+    .label{
+      padding: .65rem .85rem 1rem;
+      color: var(--muted);
+      font-size: .95rem;
+    }
+
+    /* ---------- Hover behavior ----------
+       • Straighten & lift card
+       • Brighten the image a touch
+       • Slide in caption OVERLAY from bottom
+    ------------------------------------- */
+    .card:hover{
+      transform: rotate(0deg) translateY(-6px);
+      box-shadow: var(--shadow-up);
+      z-index: 2;
+    }
+    .card:hover .photo{
+      filter: saturate(1.12) contrast(1.06);
+    }
+
+    /* ---------- Overlay caption (hidden until hover) ---------- */
+    .cap{
+      position: absolute;
+      inset: auto 0 0 0;                 /* stick to bottom */
+      background: linear-gradient(0deg, rgba(0,0,0,.56), rgba(0,0,0,0));
+      color: #ffffff;
+      padding: .9rem 1rem 1.05rem;
+      transform: translateY(100%);       /* fully hidden below the frame */
+      transition: transform .35s ease;
+    }
+    /* ✅ Show ONLY on hover */
+    .card:hover .cap{
+      transform: translateY(-60%);
+    }
+
+    /* ---------- Tilt variation using :nth-child ----------
+       These create that casual “pinned on a board” feel.
+       You can tweak degrees but keep small to avoid jittery layout.
+
+       What nth-child(6n+X) means?
+
+        nth-child() is a CSS selector that targets elements based on their order (1st, 2nd, 3rd, etc.).
+
+        6n+1 means:
+        → Select every element that is 1st in a group of 6 (1, 7, 13, …).
+
+        6n+2 means:
+        → Select every element that is 2nd in a group of 6 (2, 8, 14, …).
+
+        …and so on until 6n+6, which hits the 6th, 12th, 18th, etc.
+
+        So basically: this repeats a cycle of 6 styles.
+
+        2. What the transform: rotate(...) does
+
+        rotate() tilts an element slightly clockwise (positive angle) or counter-clockwise (negative angle).
+
+        Example:
+
+         -rotate(-2deg) → tilt left.
+
+          -rotate(2deg) → tilt right.
+    ------------------------------------------------------ */
+    .card:nth-child(6n+1){ transform: rotate(-2.0deg); }
+    .card:nth-child(6n+2){ transform: rotate( 1.6deg); }
+    .card:nth-child(6n+3){ transform: rotate(-1.2deg); }
+    .card:nth-child(6n+4){ transform: rotate( 2.4deg); }
+    .card:nth-child(6n+5){ transform: rotate(-2.6deg); }
+    .card:nth-child(6n+6){ transform: rotate( .8deg); }
+
+   
+
+    /* ========== Footer note ========== */
+    .note{
+      max-width: var(--maxw);
+      margin: 0 auto 2.5rem;
+      padding: 0 1rem;
+      color: red;
+      font-size: .98rem;
+    }
+
+    /* ========== Optional print niceties ========== */
+    @media print{
+      @page{ margin: 14mm; }
+      *{ -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+      .menu{ display:none !important; }
+      .card{ transform: none !important; box-shadow: none !important; }
+      .cap{ display:none !important; }
+    }

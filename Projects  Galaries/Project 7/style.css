@@ -1,0 +1,201 @@
+    :root{
+      --bg: #f9fafb;
+      --ink: #2c2c2c;
+      --muted: #555;
+      --accent: #8b5cf6;
+      --sidebar-bg: #111827;
+      --sidebar-ink: #f9fafb;
+      --sidebar-hover: #1f2937;
+      --radius: 10px;
+      --gap: 1rem;
+      --maxw: 1200px;
+      --shadow: 0 8px 22px rgba(0,0,0,.10);
+      --shadow-strong: 0 16px 38px rgba(0,0,0,.18);
+    }
+
+    @media (prefers-color-scheme: dark){
+      :root{
+        --bg: #1e1e22;
+        --ink: #f3f4f6;
+        --muted: #aaa;
+        --accent: #a78bfa;
+        --sidebar-bg: #0f0f14;
+        --sidebar-ink: #f3f4f6;
+        --sidebar-hover: #2c2c34;
+      }
+    }
+
+    /* ============ Base ============ */
+    html,body{margin:0}
+    body{
+      font-family: Georgia, "Times New Roman", serif;
+      background: var(--bg);
+      color: var(--ink);
+      line-height: 1.6;
+    }
+
+    /* ============ Left Sidebar (clear & legible) ============ */
+    aside{
+      position: fixed; inset: 0 auto 0 0;
+      width: 240px;
+      background: var(--sidebar-bg);
+      color: var(--sidebar-ink);
+      padding: 2rem 1.2rem;
+      display: flex; flex-direction: column; gap: 2rem;
+      box-shadow: var(--shadow);
+    }
+    aside h2{
+      margin: 0;
+      font-size: 1.35rem;
+      color: var(--accent);
+      border-bottom: 2px solid var(--accent);
+      padding-bottom: .55rem;
+      letter-spacing:.2px;
+    }
+    aside nav ul{
+      margin: 0; padding: 0; list-style: none;
+      display: grid; gap: .5rem;
+    }
+    aside nav a{
+      display: block;
+      text-decoration: none;
+      color: var(--sidebar-ink);
+      font-weight: 700;
+      padding: .6rem .8rem;
+      border-radius: 8px;
+      transition: background .2s ease, color .2s ease;
+    }
+    aside nav a:hover{ background: var(--sidebar-hover); color: var(--accent); }
+
+    /* ============ Main Area ============ */
+    main{
+      margin-left: 260px;
+      max-width: var(--maxw);
+      padding: 2rem;
+    }
+    header h1{
+      margin: 0 0 .35rem;
+      font-size: 2rem;
+      letter-spacing:.2px;
+    }
+    header p{ margin: 0 0 1.6rem; color: var(--muted); }
+
+    /* ============ Masonry via CSS Columns ============ */
+    .gallery{
+      column-count: 3;
+      column-gap: var(--gap);
+    }
+    @media (max-width: 1100px){ .gallery{ column-count: 2; } }
+    @media (max-width: 720px){
+      aside{
+        position: static; width: auto; padding: 1.2rem;
+        box-shadow: none;
+      }
+      aside nav ul{ grid-template-columns: repeat(auto-fit, minmax(130px,1fr)); }
+      main{ margin: 0; padding-top: 0; }
+      .gallery{ column-count: 1; }
+    }
+
+    /* ============ Card (tile) ============ */
+    .tile{
+      display: inline-block;      /* important for CSS columns */
+      width: 100%;
+      margin: 0 0 var(--gap);
+      background: #fff;
+      border-radius: var(--radius);
+      overflow: hidden;
+      box-shadow: var(--shadow);
+      break-inside: avoid;        /* keep card intact */
+      -webkit-column-break-inside: avoid;
+      position: relative;         /* anchor for absolute children */
+      transform: translateZ(0);
+      transition: box-shadow .25s ease, transform .25s ease;
+    }
+    @media (prefers-color-scheme: dark){
+      .tile{ background: #2b2d35; }
+    }
+
+    /* Image layer — positioned for z-index control */
+    .tile img{
+      display:block;
+      width: 100%; height: auto;
+      position: relative;         /* creates its own stacking level */
+      z-index: 1;                 /* sits below the overlay */
+      transition: transform .55s ease, filter .55s ease;
+      will-change: transform, filter;
+    }
+
+    /* Clickable layer (for focus & a11y) — on top of overlay but transparent */
+    .coverlink{
+      position: absolute; inset: 0;
+      z-index: 3;                 /* topmost so focus ring is visible */
+      /* transparent: no background so overlay remains visible below */
+    }
+
+    /* Overlay layer — hidden by default */
+    .overlay{
+      position: absolute; inset: 0;
+      z-index: 2;                 /* ABOVE the image, BELOW the link */
+      display: grid; align-content: end;
+      padding: .9rem .95rem 1rem;
+
+      /* HIDDEN by default — becomes visible on hover/focus */
+      opacity: 0;
+      transform: translateY(10px);
+      transition: opacity .35s ease, transform .35s ease;
+
+      /* Subtle gradient for text readability */
+      background: linear-gradient(
+        to top,
+        rgba(17,24,39,.78) 0%,
+        rgba(17,24,39,.55) 35%,
+        rgba(17,24,39,0) 70%
+      );
+      color: #fff;
+      pointer-events: none;       /* clicks go to the link */
+    }
+    .overlay .title{
+      font-size: 1rem; font-weight: 700;
+      margin: 0 0 .25rem; letter-spacing:.2px;
+    }
+    .overlay .meta{ margin: 0; font-size: .9rem; opacity: .9; }
+
+    /* Hover / focus interactions */
+    .tile:hover,
+    .tile:focus-within{
+      box-shadow: var(--shadow-strong);
+      transform: translateY(-2px);
+    }
+    .tile:hover img,
+    .tile:focus-within img{
+      transform: scale(1.04);
+      filter: saturate(1.06) contrast(1.06);
+    }
+    .tile:hover .overlay,
+    .tile:focus-within .overlay{
+      opacity: 1;                 /* SHOW overlay */
+      transform: translateY(0%);
+    }
+
+    /* Focus ring on the invisible link for keyboard users */
+    .coverlink:focus-visible{
+      outline: none;
+      box-shadow: 0 0 0 3px rgba(139,92,246,.55), 0 0 0 6px rgba(139,92,246,.25);
+      border-radius: 6px;
+      margin: .5rem;              /* give space so ring isn't clipped */
+    }
+
+    /* Optional static caption below the image (non-overlay) */
+    .caption{
+      padding: .65rem .8rem .8rem;
+      color: var(--muted);
+      border-top: 1px solid rgba(0,0,0,.06);
+      background: rgba(0,0,0,.02);
+      font-size: .95rem;
+    }
+    @media (prefers-color-scheme: dark){
+      .caption{
+        border-top: 1px solid rgba(255,255,255,.08);
+        background: rgba(255,255,255,.03);
+      }
+    }

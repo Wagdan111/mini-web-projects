@@ -1,0 +1,153 @@
+    :root{
+      --bg: #0b0f18;
+      --ink: #e6e8ee;
+      --muted: #9aa2b2;
+      --accent: #60a5fa;
+      --border: #1f2633;
+      --radius: 16px;
+      --shadow: 0 18px 36px rgba(0,0,0,.55);
+      --maxw: 1220px;
+      --gap: 12px;
+
+      /* Reserve vertical space for the control bar (approx). */
+      --bar-h: 56px;
+    }
+
+    body{
+      margin:0;
+      font-family: system-ui,-apple-system,Segoe UI,Roboto,"Helvetica Neue",Arial,"Noto Sans",sans-serif;
+      background: var(--bg);
+      color: var(--ink);
+      line-height: 1.55;
+    }
+
+    header{
+      max-width: var(--maxw);
+      margin: 1.25rem auto 0;
+      padding: 0 1rem 1rem;
+      border-bottom: 1px solid var(--border);
+    }
+    .brand{ display:flex; align-items:flex-end; justify-content:space-between; gap:.75rem; }
+    .brand h1{ margin:0; font-size:clamp(1.2rem,2.8vw,1.6rem); }
+    .brand p{ margin:0; color:var(--muted); font-size:.95rem; }
+
+    .grid{
+      max-width: var(--maxw);
+      margin: 1.25rem auto 2rem;
+      padding: 0 1rem;
+      display:grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: var(--gap);
+    }
+
+    .card{
+      position:relative;
+      border:1px solid var(--border);
+      border-radius:var(--radius);
+      overflow:hidden;
+      background: linear-gradient(180deg, rgba(255,255,255,.03), rgba(255,255,255,.01));
+      box-shadow:var(--shadow);
+      transition: transform .25s ease;
+    }
+    .card:hover{ transform: translateY(-4px); }
+
+    .thumb{
+      aspect-ratio:16/10;
+      width:100%;
+      object-fit:cover;
+      display:block;
+      filter:saturate(1.04) contrast(1.03);
+    }
+
+    .cap{
+      position:absolute; inset:auto 0 0 0;
+      background: linear-gradient(to top, rgba(0,0,0,.78), rgba(0,0,0,.25));
+      color:#fff;
+      padding:.6rem .85rem;
+      font-size:.95rem;
+      display:flex; align-items:center; justify-content:space-between;
+      gap:.5rem;
+      opacity:0; transform:translateY(10px);
+      transition:opacity .25s ease, transform .25s ease;
+    }
+    .card:hover .cap{ opacity:1; transform:translateY(0); }
+
+    .open{ position:absolute; inset:0; }
+
+    /* ───────────── Lightbox (:target) ───────────── */
+    .lightbox{
+      position:fixed; inset:0;
+      display:none;
+      align-items:center; justify-content:center;
+      background:rgba(0,0,0,.9);
+      z-index:50;
+      padding:1rem;
+    }
+    .lightbox:target{ display:flex; }
+
+    .overlay-close{
+      position:absolute; inset:0;
+      display:block;
+      z-index:1;
+    }
+
+    /* Use grid to reserve space for the control bar */
+    .frame{
+      position:relative;
+      z-index:2;
+      background:#000;
+      border-radius:var(--radius);
+      /* No overflow hidden: let image contain itself via max-* */
+      overflow:visible;
+      display:grid;
+      grid-template-rows: 1fr auto;
+      max-width: 95vw;
+      /* Use dvh so mobile browser chrome doesn’t shrink space unexpectedly */
+      max-height: 95dvh;
+      box-shadow:0 20px 48px rgba(0,0,0,.6);
+    }
+
+    /* Image: fit *within* the available space above the bar */
+    .frame img{
+      /* Let it size naturally but clamp with max-* */
+      width:auto;
+      height:auto;
+      max-width: 95vw;
+      /* subtract the bar height from available height */
+      max-height: calc(95dvh - var(--bar-h));
+      object-fit: contain;   /* ensures full image visible */
+      justify-self: center;
+      align-self: center;
+      background:#000;
+    }
+
+    .bar{
+      height: var(--bar-h);
+      min-height: var(--bar-h);
+      padding: .65rem .9rem;
+      background: rgba(255,255,255,.08);
+      color:#fff;
+      display:flex; justify-content:space-between; align-items:center; gap:.75rem;
+      font-size:.95rem;
+    }
+
+    .close{
+      text-decoration:none;
+      background:rgba(255,255,255,.22);
+      padding:.3rem .7rem;
+      border-radius:8px;
+      color:#fff;
+      font-weight:700;
+      transition: background .2s ease, color .2s ease;
+    }
+    .close:hover{ background:var(--accent); color:#0b0f18; }
+
+    a:focus-visible{
+      outline:3px solid rgba(96,165,250,.55);
+      outline-offset:2px;
+      border-radius:10px;
+    }
+
+    @media (prefers-reduced-motion: reduce){
+      .card, .cap{ transition:none; }
+    }

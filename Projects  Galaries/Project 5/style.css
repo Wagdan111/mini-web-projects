@@ -1,0 +1,201 @@
+    :root{
+      --bg: #fbfbfb;
+      --ink: #111827;
+      --muted: #6b7280;
+
+      --accent: #16a34a;      /* emerald-600 */
+      --accent-ink: #ffffff;
+
+      --card: #ffffff;
+      --border: #e5e7eb;
+
+      --shadow-rest: 0 10px 24px rgba(0,0,0,.10);
+      --shadow-up:   0 16px 36px rgba(0,0,0,.18);
+
+      --radius: 16px;
+      --gap: 1rem;
+      --maxw: 1200px;
+    }
+    @media (prefers-color-scheme: dark){
+      :root{
+        --bg: #0f1319;
+        --ink: #e6e8ec;
+        --muted: #9aa2b2;
+
+        --accent: #34d399;    /* emerald-400 */
+        --accent-ink: #0f1319;
+
+        --card: #141a22;
+        --border: #232a34;
+
+        --shadow-rest: 0 16px 36px rgba(0,0,0,.55);
+        --shadow-up:   0 22px 48px rgba(0,0,0,.55);
+      }
+    }
+
+    /* ========== Base ========== */
+    html,body{ margin:0; padding:0; }
+    body{
+      font-family: ui-serif, Georgia, "Times New Roman", serif;
+      background: var(--bg);
+      color: var(--ink);
+      line-height: 1.72;
+    }
+
+    /* ========== Header & Underline Menu ========== */
+    header{
+      max-width: var(--maxw);
+      margin: 0 auto;
+      padding: 2rem 1rem 1rem;
+      border-bottom: 1px solid var(--border);
+    }
+    .masthead{
+      display:flex; align-items:flex-end; justify-content:space-between; gap:1rem;
+      flex-wrap: wrap;
+    }
+    .masthead h1{
+      margin:0;
+      font-size: clamp(1.6rem, 3.5vw, 2.3rem);
+      letter-spacing:.2px;
+    }
+    .dek{ margin:.35rem 0 0; color: var(--muted); max-width: 65ch; }
+
+    /* Simple underline-style menu */
+    nav.underline{
+      margin-top: 1rem;
+      display:flex; flex-wrap: wrap;
+      gap: 1rem 1.25rem;
+    }
+    .underline a{
+      position: relative;
+      text-decoration: none;
+      color: var(--ink);
+      padding-bottom: .2rem;
+      font-size: .98rem;
+    }
+    .underline a::after{
+      content:"";
+      position: absolute;
+      left: 0; bottom: -2px;
+      width: 0%;
+      height: 2px;
+      background: var(--accent);
+      transition: width .25s ease;
+    }
+    .underline a:hover::after{ width: 100%; }
+
+    /* ========== Mosaic Grid ========== */
+    .wrap{
+      max-width: var(--maxw);
+      margin: 1.25rem auto 2.25rem;
+      padding: 0 1rem;
+    }
+
+    /* We build a responsive grid where each column is at least 220px.
+       grid-auto-rows defines an implicit row height unit that we can
+       multiply with spans to create larger tiles. */
+    .mosaic{
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      grid-auto-rows: 180px;          /* base row height unit */
+      gap: var(--gap);
+      grid-auto-flow: dense;          /* pack items tightly */
+    }
+
+    /* ========== Tile (card) ========== */
+    .tile{
+      position: relative;
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      overflow: hidden;
+      box-shadow: var(--shadow-rest);
+      transition: transform .28s ease, box-shadow .28s ease, filter .28s ease;
+      will-change: transform;
+    }
+
+    /* Image fills the tile; grayscale gives an understated look that
+       pops into color on hover. */
+    .tile img{
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display:block;
+      filter: grayscale(.25) saturate(.95) contrast(1.02);
+      transition: transform .35s ease, filter .35s ease;
+    }
+
+    /* Hover interaction: lift card slightly, bring color & a touch of scale. */
+    .tile:hover{
+      transform: translateY(-6px);
+      box-shadow: var(--shadow-up);
+      z-index: 2;
+    }
+    .tile:hover img{
+      filter: grayscale(0) saturate(1.08) contrast(1.06);
+      transform: scale(1.03);
+    }
+
+    /* Hover-only overlay caption (hidden by default, slides up) */
+    .cap{
+      position: absolute;
+      inset: auto 0 0 0;     /* stick to bottom */
+      background: linear-gradient(0deg, rgba(0,0,0,.58), rgba(0,0,0,0));
+      color: #fff;
+      padding: .85rem 1rem 1rem;
+      transform: translateY(100%);
+      transition: transform .35s ease;
+      font-size: .98rem;
+      letter-spacing:.2px;
+    }
+    .tile:hover .cap{ transform: translateY(0%); }
+
+    /* ========== Span utilities (make some items larger) ========== */
+    /* span-2x2: double width + double height */
+    .span-2x2{
+      grid-column: span 2;
+      grid-row: span 2;           /* -> 2 * 180px = 360px tall  */
+    }
+    /* span-2x1: double width, single height (wide banner) */
+    .span-2x1{
+      grid-column: span 2;
+      grid-row: span 1;
+    }
+    /* span-1x2: single width, double height (tall portrait) */
+    .span-1x2{
+      grid-column: span 1;
+      grid-row: span 2;
+    }
+
+    /* On narrower screens we’ll reduce some spans to avoid overflow rows */
+    @media (max-width: 760px){
+      .span-2x2{ grid-column: span 1; grid-row: span 2; } /* keep tall, drop wide */
+      .span-2x1{ grid-column: span 1; }                   /* drop wide */
+    }
+
+    /* ========== Focus styles (overlay remains hover-only to meet spec) ========== */
+    .tile:focus-visible{
+      outline: none;
+      box-shadow:
+        0 0 0 3px rgba(22,163,74,.36),
+        0 0 0 6px rgba(22,163,74,.18),
+        var(--shadow-rest);
+    }
+
+    /* ========== Description block ========== */
+    .note{
+      max-width: var(--maxw);
+      margin: 0 auto 2.5rem;
+      padding: 0 1rem;
+      color: var(--muted);
+      font-size: .98rem;
+    }
+
+    /* ========== Print niceties ========== */
+    @media print{
+      @page{ margin: 14mm; }
+      *{ -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+      .underline{ display:none !important; }
+      .tile{ transform:none !important; box-shadow:none !important; }
+      .cap{ display:none !important; }
+    }

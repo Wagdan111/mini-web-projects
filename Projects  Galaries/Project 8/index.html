@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Project 29 – Responsive Mosaic Grid (No JS)</title>
+   <link rel="stylesheet" href="style.css">
+   
+</head>
+<body>
+
+  <!-- ===== Glassy Top Nav (different style/menu) ===== -->
+  <div class="nav">
+    <div class="nav-inner">
+      <div class="brand">Project 29</div>
+      <nav class="menu" aria-label="Primary">
+        <a href="#">Overview</a>
+        <a href="#">Galleries</a>
+        <a href="#">Collections</a>
+        <a href="#">About</a>
+        <a href="#">Contact</a>
+      </nav>
+    </div>
+  </div>
+
+  <!-- ===== Page Header ===== -->
+  <header>
+    <h1>Responsive Mosaic Grid (No JavaScript)</h1>
+    <p>Auto-fit CSS Grid with tasteful hover captions and accent spans for a magazine-grade rhythm.</p>
+  </header>
+
+  <!-- ===== Grid Gallery (ALL 22 images) ===== -->
+  <main class="grid" aria-label="Mosaic gallery">
+    <!-- Pattern per tile:
+         <figure class="tile">
+           <img src="images/A#.jpg" alt="Descriptive alt">
+           <a class="coverlink" href="#" aria-label="Open A#"></a>
+           <figcaption class="caption"><h3>…</h3><p>…</p></figcaption>
+         </figure>
+    -->
+
+    <figure class="tile">
+      <img src="images/A1.jpg" alt="Photo A1">
+      <a class="coverlink" href="#" aria-label="Open A1"></a>
+      <figcaption class="caption"><h3>A1 — Opener</h3><p>Editorial lead</p></figcaption>
+    </figure>
+
+    <figure class="tile">
+      <img src="images/A2.jpg" alt="Photo A2">
+      <a class="coverlink" href="#" aria-label="Open A2"></a>
+      <figcaption class="caption"><h3>A2 — Portrait</h3><p>Studio light</p></figcaption>
+    </figure>
+
+    <figure class="tile">
+      <img src="images/A3.jpg" alt="Photo A3">
+      <a class="coverlink" href="#" aria-label="Open A3"></a>
+      <figcaption class="caption"><h3>A3 — Landscape</h3><p>Wide horizon</p></figcaption>
+    </figure>
+
+    <figure class="tile">
+      <img src="images/A4.jpg" alt="Photo A4">
+      <a class="coverlink" href="#" aria-label="Open A4"></a>
+      <figcaption class="caption"><h3>A4 — Architecture</h3><p>Geometry & lines</p></figcaption>
+    </figure>
+
+    <figure class="tile">
+      <img src="images/A5.jpg" alt="Photo A5">
+      <a class="coverlink" href="#" aria-label="Open A5"></a>
+      <figcaption class="caption"><h3>A5 — Street</h3><p>Candid moment</p></figcaption>
+    </figure>
+
+    <figure class="tile">
+      <img src="images/A6.jpg" alt="Photo A6">
+      <a class="coverlink" href="#" aria-label="Open A6"></a>
+      <figcaption class="caption"><h3>A6 — Travel</h3><p>Color notes</p></figcaption>
+    </figure>
+
+    <figure class="tile">
+      <img src="images/A7.jpg" alt="Photo A7">
+      <a class="coverlink" href="#" aria-label="Open A7"></a>
+      <figcaption class="caption"><h3>A7 — Documentary</h3><p>On assignment</p></figcaption>
+    </figure>
+
+    <figure class="tile">
+      <img src="images/A8.jpg" alt="Photo A8">
+      <a class="coverlink" href="#" aria-label="Open A8"></a>
+      <figcaption class="caption"><h3>A8 — Minimal</h3><p>Negative space</p></figcaption>
+    </figure>
+
+    <figure class="tile">
+      <img src="images/A9.jpg" alt="Photo A9">
+      <a class="coverlink" href="#" aria-label="Open A9"></a>
+      <figcaption class="caption"><h3>A9 — Motion</h3><p>Slow shutter</p></figcaption>
+    </figure>
+
+    <figure class="tile">
+      <img src="images/A10.jpg" alt="Photo A10">
+      <a class="coverlink" href="#" aria-label="Open A10"></a>
+      <figcaption class="caption"><h3>A10 — Abstract</h3><p>Texture study</p></figcaption>
+    </figure>
+
+    <figure class="tile">
+      <img src="images/A11.jpg" alt="Photo A11">
+      <a class="coverlink" href="#" aria-label="Open A11"></a>
+      <figcaption class="caption"><h3>A11 — Portrait</h3><p>Classic tone</p></figcaption>
+    </figure>
+
+    <figure class="tile">
+      <img src="images/A12.jpg" alt="Photo A12">
+      <a class="coverlink" href="#" aria-label="Open A12"></a>
+      <figcaption class="caption"><h3>A12 — Still Life</h3><p>Studio craft</p></figcaption>
+    </figure>
+
+    <figure class="tile">
+      <img src="images/A13.jpg" alt="Photo A13">
+      <a class="coverlink" href="#" aria-label="Open A13"></a>
+      <figcaption class="caption"><h3>A13 — Landscape</h3><p>Golden hour</p></figcaption>
+    </figure>
+
+    <figure class="tile">
+      <img src="images/A14.jpg" alt="Photo A14">
+      <a class="coverlink" href="#" aria-label="Open A14"></a>
+      <figcaption class="caption"><h3>A14 — Architecture</h3><p>Modern lines</p></figcaption>
+    </figure>
+
+    <figure class="tile">
+      <img src="images/A15.jpg" alt="Photo A15">
+      <a class="coverlink" href="#" aria-label="Open A15"></a>
+      <figcaption class="caption"><h3>A15 — Street</h3><p>Monochrome</p></figcaption>
+    </figure>
+
+    <figure class="tile">
+      <img src="images/A16.jpg" alt="Photo A16">
+      <a class="coverlink" href="#" aria-label="Open A16"></a>
+      <figcaption class="caption"><h3>A16 — Travel</h3><p>Ambient light</p></figcaption>
+    </figure>
+
+    <figure class="tile">
+      <img src="images/A17.jpg" alt="Photo A17">
+      <a class="coverlink" href="#" aria-label="Open A17"></a>
+      <figcaption class="caption"><h3>A17 — Documentary</h3><p>Field work</p></figcaption>
+    </figure>
+
+    <figure class="tile">
+      <img src="images/A18.jpg" alt="Photo A18">
+      <a class="coverlink" href="#" aria-label="Open A18"></a>
+      <figcaption class="caption"><h3>A18 — Minimal</h3><p>Form & light</p></figcaption>
+    </figure>
+
+    <figure class="tile">
+      <img src="images/A19.jpg" alt="Photo A19">
+      <a class="coverlink" href="#" aria-label="Open A19"></a>
+      <figcaption class="caption"><h3>A19 — Motion</h3><p>Dynamic frame</p></figcaption>
+    </figure>
+
+    <figure class="tile">
+      <img src="images/A20.jpg" alt="Photo A20">
+      <a class="coverlink" href="#" aria-label="Open A20"></a>
+      <figcaption class="caption"><h3>A20 — Abstract</h3><p>Color fields</p></figcaption>
+    </figure>
+
+    <figure class="tile">
+      <img src="images/A21.jpg" alt="Photo A21">
+      <a class="coverlink" href="#" aria-label="Open A21"></a>
+      <figcaption class="caption"><h3>A21 — Series</h3><p>Set piece</p></figcaption>
+    </figure>
+
+    <figure class="tile">
+      <img src="images/A22.jpg" alt="Photo A22">
+      <a class="coverlink" href="#" aria-label="Open A22"></a>
+      <figcaption class="caption"><h3>A22 — Closer</h3><p>Final frame</p></figcaption>
+    </figure>
+  </main>
+
+</body>
+</html>

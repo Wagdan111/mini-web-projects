@@ -1,0 +1,212 @@
+    :root{
+      --bg: #0e1114;            /* deep grey-blue */
+      --ink: #e7eaee;           /* high-contrast type on dark */
+      --muted: #9aa3b2;         /* secondary text */
+      --accent: #60a5fa;        /* refined blue accent */
+      --accent-ink: #0b1020;
+
+      --frame: #1b2330;         /* tile border/frame */
+      --tile: #0f141a;          /* tile background */
+      --rule: #202a38;          /* hairline rules */
+
+      --maxw: 1260px;           /* content width */
+      --radius: 14px;           /* tile corner radius */
+      --gap: 18px;              /* grid gap */
+      --shadow-rest: 0 10px 24px rgba(0,0,0,.28);
+      --shadow-hover: 0 18px 42px rgba(0,0,0,.45);
+
+      --title-size: clamp(1.6rem, 2.6vw, 2.2rem);
+      --lead-size: clamp(1rem, 1.2vw, 1.06rem);
+    }
+
+    @media (prefers-color-scheme: light){
+      :root{
+        --bg: #f7f8fa;
+        --ink: #111827;
+        --muted: #6b7280;
+        --accent: #2563eb;
+        --accent-ink: #ffffff;
+
+        --frame: #e5e7eb;
+        --tile: #ffffff;
+        --rule: #e5e7eb;
+
+        --shadow-rest: 0 10px 24px rgba(0,0,0,.08);
+        --shadow-hover: 0 18px 42px rgba(0,0,0,.14);
+      }
+    }
+
+    /* ---------- Base ---------- */
+    html, body { margin:0; padding:0; }
+    body{
+      font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", "Liberation Sans";
+      background: var(--bg);
+      color: var(--ink);
+      line-height: 1.7;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    /* ---------- Header & Navigation ---------- */
+    header{
+      max-width: var(--maxw);
+      margin: 0 auto;
+      padding: 2rem 1rem 1.25rem;
+      border-bottom: 1px solid var(--rule);
+    }
+    .bar{
+      display:flex; align-items:center; justify-content:space-between; gap:1rem;
+      flex-wrap: wrap;
+    }
+    .brand{
+      display:flex; align-items:center; gap:.8rem;
+    }
+    .mark{
+      /* small square “logomark” with subtle gradient */
+      width: 28px; height: 28px; border-radius: 6px;
+      background: linear-gradient(135deg, var(--accent) 0%, color-mix(in oklab, var(--accent) 35%, transparent) 100%);
+      box-shadow: 0 4px 12px rgba(0,0,0,.25), 0 0 0 1px rgba(255,255,255,.06) inset;
+      flex: none;
+    }
+    h1{
+      margin:0; font-size: var(--title-size); letter-spacing:.2px;
+    }
+    .lead{
+      margin:.45rem 0 0; color: var(--muted); font-size: var(--lead-size); max-width: 68ch;
+    }
+
+    nav ul{
+      list-style:none; margin:0; padding:0; display:flex; gap:1rem; flex-wrap:wrap;
+    }
+    nav a{
+      display:inline-block; text-decoration:none; color: var(--ink);
+      padding: .45rem .6rem;
+      border-radius: 10px;
+      border: 1px solid transparent;
+      position: relative;
+      transition: border-color .2s ease, color .2s ease, transform .2s ease;
+    }
+    nav a::after{
+      /* elegant underline on hover/focus */
+      content:"";
+      position:absolute; left:.6rem; right:.6rem; bottom:.35rem;
+      height:2px; border-radius:2px;
+      background: linear-gradient(90deg, transparent, var(--accent), transparent);
+      transform: scaleX(0);
+      transform-origin: center;
+      transition: transform .25s ease;
+    }
+    nav a:hover{ color: var(--accent); transform: translateY(-1px); }
+    nav a:hover::after, nav a:focus-visible::after{ transform: scaleX(1); }
+    nav a:focus-visible{
+      outline: 3px solid color-mix(in oklab, var(--accent) 45%, transparent);
+      outline-offset: 3px;
+    }
+
+    /* ---------- Grid ---------- */
+    .gallery{
+      max-width: var(--maxw);
+      margin: 1.4rem auto 2.4rem;
+      padding: 0 1rem;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: var(--gap);
+    }
+
+    /* ---------- Tile ---------- */
+    figure.tile{
+      margin:0;
+      background: var(--tile);
+      border: 1px solid var(--frame);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow-rest);
+      overflow: clip; /* blocks outlines from bleeding */
+      position: relative;
+      transition: transform .28s ease, box-shadow .28s ease, border-color .28s ease;
+    }
+    figure.tile:hover{ transform: translateY(-6px); box-shadow: var(--shadow-hover); }
+    figure.tile:has(a:focus-visible){
+      /* elevate when keyboard focusing the inner link */
+      transform: translateY(-6px); box-shadow: var(--shadow-hover);
+      border-color: color-mix(in oklab, var(--accent) 40%, var(--frame));
+    }
+
+    /* Image: keep consistent shape, crop gracefully */
+    .thumb{
+      width: 100%;
+      aspect-ratio: 4 / 3;     /* editorial 4:3 for a polished grid */
+      object-fit: cover;
+      display:block;
+      transform: scale(1);
+      transition: transform .28s ease, filter .28s ease;
+      filter: saturate(1.02) contrast(1.02);
+    }
+    .tile:hover .thumb,
+    .tile:has(a:focus-visible) .thumb{
+      transform: scale(1.015);
+      filter: saturate(1.06) contrast(1.06);
+    }
+
+    /* ---------- Caption Overlay (hidden by default) ---------- */
+    figcaption.caption{
+      /* gradient veil + caption block pinned to bottom */
+      position: absolute; inset: auto 0 0 0;
+      display:flex; align-items: flex-end; justify-content: space-between;
+      gap:.75rem;
+      padding: .85rem .95rem;
+      color: #fff;
+      background: linear-gradient(180deg, rgba(0,0,0,0) 0%, rgba(0,0,0,.60) 100%);
+
+      /* Hidden until hover/focus */
+      opacity: 0; transform: translateY(10px);
+      transition: opacity .28s ease, transform .28s ease;
+    }
+    .tile:hover .caption,
+    .tile:has(a:focus-visible) .caption{ opacity:1; transform: translateY(0); }
+
+    .meta{
+      display:flex; align-items:center; gap:.6rem; flex-wrap: wrap;
+      font-size: .95rem;
+    }
+    .chip{
+      display:inline-block; padding:.15rem .5rem; border-radius: 999px;
+      background: color-mix(in oklab, var(--accent) 75%, black);
+      box-shadow: 0 0 0 2px rgba(255,255,255,.15) inset;
+      font-weight: 600; letter-spacing:.02em; font-size:.82rem;
+    }
+    .code{
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace;
+      letter-spacing:.02em;
+      opacity:.95;
+    }
+
+    /* ---------- Links for accessibility ---------- */
+    .tile a{
+      position:absolute; inset:0;
+      /* Make the entire tile focusable without visible link UI.
+         The figcaption becomes the visible affordance on hover/focus. */
+    }
+    .tile a:focus-visible{
+      outline: 3px solid color-mix(in oklab, var(--accent) 55%, transparent);
+      outline-offset: -3px;   /* keep ring inside frame */
+      border-radius: 6px;
+    }
+
+    /* ---------- Motion preference ---------- */
+    @media (prefers-reduced-motion: reduce){
+      *{ transition: none !important; }
+    }
+
+    /* ---------- Print ---------- */
+    @media print{
+      @page{ margin: 14mm; }
+      *{ -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+      body{ background: #fff; color:#000; }
+      header{ border:0; }
+      nav{ display:none !important; }
+      figure.tile{ box-shadow: none !important; transform:none !important; }
+      figcaption.caption{
+        opacity:1 !important; transform:none !important;
+        background: rgba(0,0,0,.06) !important; color:#000 !important;
+      }
+    }

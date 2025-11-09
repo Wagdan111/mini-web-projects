@@ -1,0 +1,194 @@
+    :root{
+      --bg: #fcfbf9;
+      --ink: #1f2328;
+      --muted:#6b7280;
+      --accent:#0ea5e9;       /* sky-500 */
+      --accent-ink:#ffffff;
+      --card:#ffffff;
+      --border:#e5e7eb;
+      --radius:16px;
+      --shadow:0 12px 28px rgba(0,0,0,.12);
+      --maxw:1200px;
+      --gap: 1rem;
+    }
+    @media (prefers-color-scheme: dark){
+      :root{
+        --bg:#0c0f14;
+        --ink:#e6e8ec;
+        --muted:#9aa2b2;
+        --accent:#38bdf8;     /* sky-400 */
+        --accent-ink:#0c0f14;
+        --card:#151a21;
+        --border:#232a34;
+        --shadow:0 18px 36px rgba(0,0,0,.55);
+      }
+    }
+
+    /* ---------- Base / Reset ---------- */
+    *{ box-sizing:border-box; margin:0; padding:0 }
+    img{ display:block; max-width:100%; height:auto }
+    html,body{ height:100% }
+    body{
+      font-family: Georgia, "Times New Roman", serif;
+      background: var(--bg);
+      color: var(--ink);
+      line-height: 1.7;
+    }
+
+    /* ---------- Header with Underline Menu ---------- */
+    header{
+      max-width: var(--maxw);
+      margin: 0 auto;
+      padding: 1.75rem 1rem 1rem;
+      border-bottom: 1px solid var(--border);
+    }
+    .masthead{
+      display:flex; align-items:flex-end; justify-content:space-between; gap:1rem;
+      flex-wrap: wrap;
+    }
+    .masthead h1{
+      margin:0; font-size: clamp(1.6rem, 3.2vw, 2.2rem); letter-spacing:.2px;
+    }
+    .dek{ margin:.25rem 0 0; color: var(--muted); }
+
+    /* Top nav: animated underline via background-size trick */
+    nav{
+      margin-top: .8rem;
+      display:flex; gap:.75rem; flex-wrap: wrap;
+    }
+    nav a{
+      text-decoration:none; color: var(--ink);
+      padding:.4rem .55rem;
+      border-radius: 8px;
+      /* Underline animation: a linear-gradient sized to 0% width by default */
+      background: linear-gradient(currentColor, currentColor) left bottom / 0% 2px no-repeat transparent;
+      transition: background-size .25s ease, color .2s ease, transform .2s ease;
+    }
+    nav a:hover{
+      background-size: 100% 2px;         /* animate underline to full width */
+      color: var(--accent);
+      transform: translateY(-1px);
+    }
+    a:focus-visible{
+      outline: 3px solid rgba(14,165,233,.35);  /* visible keyboard focus */
+      outline-offset: 3px;
+      border-radius: 10px;
+    }
+
+    /* ---------- Gallery Grid ---------- */
+    .wrap{
+      max-width: var(--maxw);
+      margin: 0 auto;
+      padding: 1rem;
+    }
+    .grid{
+      display: grid;
+      gap: var(--gap);
+      /* Auto-fit responsive columns:
+         - Each cell wants at least 240px, but can grow to 1fr
+         - This collapses cleanly from 4 -> 3 -> 2 -> 1 columns */
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    }
+
+    .card{
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      overflow: hidden;
+      transition: transform .25s ease, box-shadow .25s ease;
+    }
+    .card:hover{
+      transform: translateY(-6px);
+      box-shadow: 0 16px 32px rgba(0,0,0,.16);
+    }
+
+    /* Image: enforce consistent crop with aspect-ratio + cover */
+    .thumb{
+      width:100%;
+      aspect-ratio: 4 / 3;              /* neat grid rhythm; adjust as desired */
+      object-fit: cover;
+      /* Subtle editorial effect: faint desaturation & warmth that eases on hover */
+      filter: saturate(.9) contrast(1.02);
+      transition: transform .45s ease, filter .35s ease;
+    }
+    .card:hover .thumb{
+      transform: scale(1.035);
+      filter: saturate(1) contrast(1.05);
+    }
+
+    .pad{ padding: .9rem 1rem 1.1rem; }
+    .title{
+      margin:.1rem 0 .4rem;
+      font-size:1.1rem; color: var(--accent);
+      line-height:1.25;
+    }
+    .lede{ margin:0; color: var(--ink); opacity:.95 }
+
+    /* ---------- CSS :target Lightbox (no JS) ---------- */
+    /* Structure:
+       - Each grid item links to #imgN (an overlay <section id="imgN"> below)
+       - When hash matches, :target becomes visible as a fullscreen overlay
+       - Clicking the close button or background link returns to # (closes) */
+    .lightbox{
+      position: fixed;
+      inset: 0;                           /* top:0 right:0 bottom:0 left:0 */
+      background: rgba(0,0,0,.72);
+      display: none;                      /* hidden by default */
+      align-items: center;
+      justify-content: center;
+      padding: 2rem 1rem;
+      z-index: 50;
+    }
+    .lightbox:target{
+      display: flex;                      /* becomes visible when targeted */
+    }
+
+    .frame{
+      background: var(--card);
+      color: var(--ink);
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      box-shadow: var(--shadow);
+      max-width: min(980px, 92vw);
+      max-height: 86vh;
+      overflow: auto;                     /* scroll if content taller than viewport */
+      padding: 1.1rem;
+    }
+    .full{
+      width:100%;
+      height:auto;
+      max-height: 64vh;                   /* keep caption visible below */
+      object-fit: contain;
+      border-radius: 12px;
+      border: 1px solid var(--border);
+    }
+    .caption{
+      margin-top: .75rem;
+      display:flex; align-items:center; justify-content:space-between; gap:.75rem;
+      flex-wrap: wrap;
+    }
+    .caption h3{
+      margin:.2rem 0; font-size:1.1rem; color: var(--accent);
+    }
+    .caption p{ margin:0; color: var(--muted) }
+
+    /* Close button pattern: a normal link back to "#" */
+    .close{
+      display:inline-block;
+      margin-left:auto;
+      text-decoration:none;
+      background: var(--accent);
+      color: var(--accent-ink);
+      font-weight:700;
+      padding:.45rem .8rem;
+      border-radius: 999px;
+      box-shadow: 0 10px 24px rgba(14,165,233,.32);
+    }
+
+    /* Optional helper: clicking backdrop closes too (link filling the screen) */
+    .backdrop-close{
+      position: fixed; inset:0;
+      /* put it behind .frame but above the page; clicking returns to "#" */
+      z-index: -1;
+    }
